@@ -1,0 +1,15 @@
+[
+    {
+        "nombre" : "Mago Oscuro",
+        "rareza" : "7 estrellas",
+        "imagen" : "./img/Foto_mago_oscuro.jpg",
+        "desc" : "Lorem ipsum Lorem ipsum"
+    },
+    {
+        "nombre" : "Maga Oscura",
+        "rareza" : "5 estrellas",
+        "imagen" : "./img/maga_oscura.jpg",
+        "desc" : "Lorem ipsum Lorem ipsum"
+    }
+]
+

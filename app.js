@@ -10,7 +10,7 @@ class Carta{
 class Interfaz{
     agregarCarta(carta){
 
-        let imagen ;
+        let imagen;
         carta.imagen == undefined ? imagen = "imagen-vacia.jpg" : imagen = carta.imagen.name;
 
         const cardsContainer = document.getElementById('card-container');
@@ -23,6 +23,7 @@ class Interfaz{
                 isExist = true;
             }
         });
+
         if(!isExist){
             const element = document.createElement('div');
     
@@ -36,12 +37,35 @@ class Interfaz{
             </div>
             `;
             cardsContainer.appendChild(element);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Tu carta ha sido agregada',
+                showConfirmButton: false,
+                timer: 1500
+              })
         }
     }
 
     borrarCarta(element){
         if(element.name === "borrar-carta"){
-            element.parentElement.remove();
+            Swal.fire({
+                title: '¿Seguro que quieres borrar esta carta?',
+                text: "¡Esta acción no puede revertirse!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Eliminar'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire(
+                    '¡Eliminado!',
+                    'La carta fue eliminada',
+                  )
+                  element.parentElement.remove();
+              }
+            })
         }
     }
 
@@ -79,8 +103,6 @@ document.getElementById("cards-form").addEventListener("submit", function(event)
 
     const listadoDeCartas = document.querySelectorAll('.card');
 
-
-
     const carta = new Carta(newName,rareza,imagen,newDesc);
 
 
@@ -89,10 +111,13 @@ document.getElementById("cards-form").addEventListener("submit", function(event)
     event.preventDefault();
 });
 
+
+
 document.getElementById("card-container").addEventListener("click",function(e){
-    const interfaz = new Interfaz();
-    interfaz.borrarCarta(e.target)
+    interfaz.borrarCarta(e.target);
 });
+
+
 
 botonGuardar.addEventListener("click",()=>{
     conjuntoCartas = document.querySelectorAll('.card');
@@ -129,3 +154,26 @@ window.addEventListener("load",()=>{
     });
     
 })
+
+
+const data = "./cartas.json";
+fetch(data)  
+    .then((response) => response.json())
+    .then((cartas) => {
+        
+        cartas.forEach((carta) => {
+            const div = document.createElement("div");
+            const modal = document.getElementById("modal")
+
+            div.innerHTML = `
+            <div class="card">
+                <h2 class="card-title">${carta.nombre}</h2>
+                <h3 class="card-rareza">Rareza: ${carta.rareza}*</h3>
+                <img class="card-img" src="${carta.imagen}" alt="">
+                <p class="card-text">${carta.desc}</p>
+            </div>
+            `;
+
+            modal.append(div);
+        })
+    });  
