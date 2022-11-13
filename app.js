@@ -166,7 +166,7 @@ fetch(data)
             const modal = document.getElementById("modal")
 
             div.innerHTML = `
-            <div class="card">
+            <div class="card-modal">
                 <h2 class="card-title">${carta.nombre}</h2>
                 <h3 class="card-rareza">Rareza: ${carta.rareza}*</h3>
                 <img class="card-img" src="${carta.imagen}" alt="">

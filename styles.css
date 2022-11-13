@@ -137,7 +137,22 @@ h1{
     background-color:rgb(129, 99, 53);
     margin: 20px 0;
 }
+
 .modal{
     display: flex;
     justify-content: space-around;
+}
+
+.card-modal{
+    max-width: 380px;
+    height: 550px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color:rgb(129, 99, 53);
+}
+.card-modal img{
+    width: 100%;
 }
